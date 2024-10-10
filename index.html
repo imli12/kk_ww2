@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kk_ww</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .pushable {
+      background: hsl(340deg 100% 32%);
+      border-radius: 12px;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      outline-offset: 4px;
+    }
+    .front {
+      display: block;
+      padding: 12px 42px;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      background: hsl(345deg 100% 47%);
+      color: white;
+      transform: translateY(-6px);
+    }
+
+    .pushable:active .front {
+      transform: translateY(-2px);
+    }
+
+    .popup1,
+    .popup2 {
+      display: none;
+      border: 2px solid hsl(345deg 100% 47%);
+      padding: 20px;
+      font-family: sans-serif;
+      color: hsl(345deg 100% 47%);
+      position: fixed;
+      background: #fff;
+    }
+    .popup2 {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup2 h1 {
+      margin-bottom: 10px;
+    }
+    .popup2 #gif {
+      width: 160px;
+      margin-bottom: 10px;
+    }
+    .popup2 #rizz {
+      width: 50px;
+      margin-top: 10px;
+      float: right;
+    }
+    .popup2 #quote {
+      width: 165px;
+      float: left;
+    }
+  </style>
+  <body>
+    <button class="pushable" onclick="showPopup()">
+      <span class="front"> Push me</span>
+    </button>
+
+    <div class="popup1" id="popup1">
+      <h3>Scanning You 🌷 Please Wait...</h3>
+    </div>
+
+    <div class="popup2" id="popup2">
+      <h1>Happy Birthday</h1>
+      <p>Dear, [Her/His Name]</p>
+      <img src="peach-cat.gif" alt="" id="gif" />
+      <div>
+        <p id="quote">
+          "You must be a Proverbs 31 kind of person because you're worth far
+          more than rubies!"
+        </p>
+        <img src="rizz.jpeg" alt="" id="rizz" />
+      </div>
+    </div>
+
+    <audio id="birthdayAudio" src="audio.mp3"></audio>
+
+    <script>
+      function showPopup() {
+        document.getElementById("popup1").style.display = "block";
+
+        var audio = document.getElementById("birthdayAudio");
+
+        audio.addEventListener("canplaythrough", function () {
+          // Hide the first popup after 3 seconds
+          setTimeout(function () {
+            document.getElementById("popup1").style.display = "none";
+            document.getElementById("popup2").style.display = "flex";
+            audio.play(); // Play the audio once the second popup is shown
+          }, 3000);
+        });
+
+        audio.load(); // Load the audio
+      }
+    </script>
+  </body>
+</html>
