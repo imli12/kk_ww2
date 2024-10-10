@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>kk_ww</title>
+    <title>kk_ww2</title>
   </head>
   <style>
     * {
@@ -93,24 +93,49 @@
       </div>
     </div>
 
-    <audio id="birthdayAudio" src="audio.mp3"></audio>
+    <audio id="birthdayAudio" src="audio.mp3" muted></audio>
 
     <script>
       function showPopup() {
         document.getElementById("popup1").style.display = "block";
 
         var audio = document.getElementById("birthdayAudio");
+        var gif = document.getElementById("gif");
+        var rizzImage = document.getElementById("rizz");
 
+        // Check when both the GIF and image are fully loaded
+        var imagesLoaded = 0;
+        var totalImages = 2; // We have 2 images: the GIF and rizz.jpeg
+
+        function imageLoaded() {
+          imagesLoaded++;
+          if (imagesLoaded === totalImages) {
+            // Now, both images are loaded, and we show popup2
+            setTimeout(function () {
+              document.getElementById("popup1").style.display = "none";
+              document.getElementById("popup2").style.display = "flex";
+              
+              // Play the audio
+              audio.play();
+              audio.muted = false; // Unmute after popup2 shows
+            }, 3000);
+          }
+        }
+
+        // Add event listeners for images loading
+        gif.addEventListener("load", imageLoaded);
+        rizzImage.addEventListener("load", imageLoaded);
+
+        // Start loading the audio
         audio.addEventListener("canplaythrough", function () {
-          // Hide the first popup after 3 seconds
-          setTimeout(function () {
-            document.getElementById("popup1").style.display = "none";
-            document.getElementById("popup2").style.display = "flex";
-            audio.play(); // Play the audio once the second popup is shown
-          }, 3000);
+          console.log('Audio is ready to play');
         });
 
         audio.load(); // Load the audio
+
+        // Make sure images are triggered to load
+        gif.src = "peach-cat.gif"; // Reassign to trigger loading in case of cache
+        rizzImage.src = "rizz.jpeg"; // Reassign to trigger loading in case of cache
       }
     </script>
   </body>
